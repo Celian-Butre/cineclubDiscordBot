@@ -21,8 +21,6 @@ cineclubGuildID = int(os.getenv('cineclubGuildID'))
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!",intents=intents)
 
-csvStoragePath = str(os.path.dirname(programPath) + "/valuesToSave.csv")
-
 #globals
 roleList = None
 cineclubGuild = None
@@ -54,33 +52,6 @@ class Role:
     def __str__(self):
         return ("clickez sur " + self.emoji + "  pour obtenir le rôle " + str(self.name) + ", c'est " + self.description)
 
-def update_csv(filename, variable_name, new_value):
-    # Read the existing CSV file and store the data in a list
-    rows = []
-
-    with open(filename, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.reader(file, delimiter=';')
-        for row in reader:
-            if row and row[0] == variable_name:
-                # Update the value if the variable already exists
-                rows.append([variable_name, new_value])
-            else:
-                rows.append(row)
-    # Write the updated data back to the CSV file
-    with open(filename, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerows(rows)
-
-def get_value_from_csv(filename, variable_name):
-    with open(filename, mode='r', newline='', encoding='utf-8') as file:
-        print("hi")
-        reader = csv.reader(file, delimiter=';')
-        for row in reader:
-            print("row")
-            if row and row[0] == variable_name:
-                print(row[1])
-                return row[1]  # Return the value if the variable is found
-    
 
 def makeRoleList():
     global roleList
